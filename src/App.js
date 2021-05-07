@@ -15,17 +15,11 @@ const LIST = [{
     text: 'goods',
     url: '/goods'
 },{
-    text: '折线图-line',
+    text: '折线图/面积图',
     url: '/line'
 },{
-    text: '柱状图-bar',
+    text: '柱状图/条形图',
     url: '/bar'
-},{
-    text: '面积图-area',
-    url: '/area'
-},{
-    text: '条形图-vbar',
-    url: '/vbar'
 },{
     text: '饼图-pie',
     url: '/pie'
@@ -43,8 +37,6 @@ class App extends Component {
                   <Route path='/goods' component={Goods} />
                   <Route path='/line' component={Line} />
                   <Route path='/bar' component={Bar} />
-                  <Route path='/area' component={Bar} />
-                  <Route path='/vbar' component={Bar} />
                   <Route path='/pie' component={Pie} />
                 </div>
             </div>
