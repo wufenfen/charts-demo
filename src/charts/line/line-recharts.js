@@ -1,5 +1,8 @@
+/**
+ * 官方示例：https://recharts.org/en-US/examples/SimpleLineChart
+ */
 import React from "react"
-import { LineChart, XAxis, YAxis, Tooltip, CartesianGrid, Line } from "recharts"
+import { LineChart, XAxis, YAxis, Tooltip, CartesianGrid, Line, Legend, ReferenceLine } from "recharts"
 
 const data = [
   { name: "Page A", uv: 4000, pv: 2400, amt: 2400, time: 1 },
@@ -9,7 +12,6 @@ const data = [
   { name: "Page E", uv: 2500, pv: 4800, amt: 2181, time: 12 },
   { name: "Page F", uv: 1220, pv: 3800, amt: 2500, time: 16 },
   { name: "Page G", uv: 2300, pv: 4300, amt: 2100, time: 18 },
-  { name: "Page H", time: 24 },
 ]
 
 export const LineRecharts = (props) => (
@@ -20,11 +22,15 @@ export const LineRecharts = (props) => (
       data={data}
       margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
     >
-      <XAxis dataKey="name" />
+       <Legend verticalAlign="top" height={36}/>
+      <XAxis dataKey="name" padding={{ left: 30, right: 30 }}/>
+      {/* <YAxis dataKey="uv"  type="number"/> */}
       <Tooltip />
       <CartesianGrid stroke="#f5f5f5" />
-      <Line type="monotone" dataKey="uv" stroke="#ff7300" yAxisId={0} />
-      <Line type="monotone" dataKey="pv" stroke="#387908" yAxisId={1} />
+      <ReferenceLine x="Page C" stroke="red" label="Max PV PAGE" />
+      <ReferenceLine y={1800} label="Max" stroke="red" />
+      <Line type="monotone" dataKey="uv" stroke="#ff7300" yAxisId={0} label={{ fill: 'grey', fontSize: 10 }}  />
+      <Line type="monotone" dataKey="pv" stroke="#387908" yAxisId={1} strokeDasharray="3 4 5 2" />
     </LineChart>
   </div>
 )

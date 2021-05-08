@@ -12,7 +12,7 @@ const data = [
   { name: "Page H", time: 24 },
 ]
 
-export const LineD3 = (props) => (
+export const LineEcharts = (props) => (
   <div>
     <LineChart
       width={400}
