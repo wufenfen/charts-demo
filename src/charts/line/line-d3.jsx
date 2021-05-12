@@ -19,7 +19,7 @@ export const LineD3 = (props) => {
   const id = Math.ceil(Math.random() * 10)
 
   React.useEffect(() => {
-    const margin = { top: 20, right: 30, bottom: 30, left: 10 }
+    const margin = { top: 20, right: 30, bottom: 30, left: 40 }
     const height = 300
     const width = 400
 
@@ -43,7 +43,7 @@ export const LineD3 = (props) => {
     const line = d3
       .line()
       // 绘制曲线
-      .curve(d3.curveCardinal)
+       .curve(d3.curveCardinal)
       .x((d) => x(d.name))
       .y((d) => y(d.pv))
 
@@ -83,6 +83,41 @@ export const LineD3 = (props) => {
         .attr("stroke-linejoin", "round")
         .attr("stroke-linecap", "round")
         .attr("d", line)
+
+      dom
+        .selectAll("circle")
+        .data(data)
+        .enter()
+        .append("circle")
+        .attr("cx", function (d) {
+          return x(d.name)
+        })
+        .attr("cy", function (d) {
+          return y(d.pv)
+        })
+        .attr("r", "3px")
+        .attr("fill", "white")
+        .attr("stroke", "#387908")
+
+      // 添加文本没成功！
+      // dom
+      //   .selectAll("text")
+      //   .data(data)
+      //   .enter()
+      //   .append("text")
+      //   .attr("x", function (d) {
+      //     return x(d.name)
+      //   })
+      //   .attr("y", function (d) {
+      //     return y(d.pv)
+      //   })
+      //   .attr("text", function (d) {
+      //     return d.pv
+      //   })  
+      //   .attr("stroke", "black")
+      //   .attr("font-size", 12)
+      //   .attr("color", 'red')
+
 
       dom
         .attr("width", width) //设定宽度
