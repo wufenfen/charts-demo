@@ -21,89 +21,113 @@ export const LineEcharts = (props) => {
     var myChart = echarts.init(chartDom)
     var option = {
       title: {
-        text: '我是echarts折线图',
+        text: "我是echarts折线图",
         textStyle: {
-          fontSize: 14
-        }
+          fontSize: 14,
+        },
       },
       xAxis: {
         type: "category",
         data: data.map((item) => item.name),
-        name: 'name'
+        name: "name",
+        //网格样式
+        splitLine: {
+          show: true,
+          lineStyle: {
+            type: 'dashed'
+          }
+        }
       },
       yAxis: {
         type: "value",
-        name: 'uv',
-        nameLocation: 'middle',
-        nameGap: 50
+        name: "uv",
+        nameLocation: "middle",
+        nameGap: 50,
+        splitLine: {
+          //网格线
+          lineStyle: {
+            type: "dashed", //设置网格线类型 dotted：虚线   solid:实线
+          },
+          show: true, //隐藏或显示
+        },
       },
       grid: {
-        show: false
+        show: false,
       },
       series: [
         {
-          name: '系列1',
+          name: "系列1",
           data: data.map((item) => item.uv),
           type: "line",
           smooth: true, // 曲线
-          symbol: 'diamond', // 标记点样式 'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow', 'none' https://echarts.apache.org/zh/option.html#series-line.symbol
+          symbol: "diamond", // 标记点样式 'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow', 'none' https://echarts.apache.org/zh/option.html#series-line.symbol
           symbolSize: 10,
-          label: { // 显示标签
+          label: {
+            // 显示标签
             show: true,
           },
           connectNulls: true, // 断点处理
-          markLine: {   // 辅助线 https://echarts.apache.org/examples/zh/editor.html?c=line-markline
-            data: [[{
-              coord: ['Page A', -3000]
-            },
-            {
-              coord: ['Page G', -3000]
-            }]]
-          }
+          markLine: {
+            // 辅助线 https://echarts.apache.org/examples/zh/editor.html?c=line-markline
+            data: [
+              [
+                {
+                  coord: ["Page A", -3000],
+                },
+                {
+                  coord: ["Page G", -3000],
+                },
+              ],
+            ],
+          },
         },
         {
-          name: '系列2',
+          name: "系列2",
           data: data.map((item) => item.pv),
           type: "line",
           smooth: false,
-          markPoint: { // 标记点：https://echarts.apache.org/zh/option.html#series-line.markPoint
-            symbol: 'pin',
+          markPoint: {
+            // 标记点：https://echarts.apache.org/zh/option.html#series-line.markPoint
+            symbol: "pin",
             symbolSize: 20,
             data: [
               {
-                coord: ['Page E', 3908]
-              }
-            ]
+                coord: ["Page E", 3908],
+              },
+            ],
           },
           lineStyle: {
-            type: 'dashed', // 虚线
+            type: "dashed", // 虚线
           },
-          areaStyle:{      // 面积图
-            color: 'pink',
-            opacity: .2 
-          }
+          areaStyle: {
+            // 面积图
+            color: "pink",
+            opacity: 0.2,
+          },
         },
       ],
-      tooltip: {   // https://echarts.apache.org/zh/option.html#tooltip.formatter 
+      tooltip: {
+        // https://echarts.apache.org/zh/option.html#tooltip.formatter
         trigger: "item", // 'axis'
-        formatter: '{b0}: {c0} 万' // tooltip显示内容
+        formatter: "{b0}: {c0} 万", // tooltip显示内容
       },
       legend: {
         show: true,
-        data: ['系列1', '系列2'],
-        orient: 'vertical',
-        right: 0
+        data: ["系列1", "系列2"],
+        orient: "vertical",
+        right: 0,
       },
-      dataZoom: [  // 缩略轴： https://echarts.apache.org/zh/option.html#dataZoom
+      dataZoom: [
+        // 缩略轴： https://echarts.apache.org/zh/option.html#dataZoom
         {
           type: "slider",
           start: 0,
           end: 100,
-        }, 
+        },
       ],
     }
 
     option && myChart.setOption(option)
   }, [])
-  return <div id="line-echarts" style={{height: 300, width: 800}}></div>
+  return <div id="line-echarts" style={{ height: 300, width: 800 }}></div>
 }
