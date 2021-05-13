@@ -1,5 +1,8 @@
 /**
  * 官方示例：https://echarts.apache.org/examples/zh/editor.html?c=line-smooth
+ * 开发体验：感觉自己是个配置工程师，echarts配置项很多很强大，只要理解了文档（非常齐全），基本可以应付很多场合。
+ * 缺点在于灵活性和可定制性，只要echarts没提供的，那就不知道怎么做了。后续待研究。
+ * 上手成本很低，基本会点代码就能配出个图表来，开发体验 90分。
  */
 
 import * as echarts from 'echarts'
