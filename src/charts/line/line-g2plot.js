@@ -5,113 +5,118 @@
  */
 
 import React from "react"
-import { Line } from "@antv/g2plot"
+import { Line, Area } from "@antv/g2plot"
 
 const data = [
-  { name: "Page A", uv: 4000, pv: 2400, amt: 2400, time: 1, key: 'uv' },
-  { name: "Page B", uv: 3000, pv: 1398, amt: 2210, time: 3, key: 'uv' },
-  { name: "Page C", uv: 2000, pv: -9800, amt: 2290, time: 9, key: 'uv' },
-  { name: "Page D", uv: 2780, pv: 3908, amt: 2000, time: 10, key: 'uv' },
-  { name: "Page E", uv: 2500, pv: 4800, amt: 2181, time: 12, key: 'uv' },
-  { name: "Page F", uv: 1220, pv: 3800, amt: 2500, time: 16, key: 'uv' },
-  { name: "Page G", uv: 2300, pv: 4300, amt: 2100, time: 18, key: 'uv' },
-  { name: "Page A", pv: 4000, uv: 2400, amt: 2400, time: 1, key: 'pv' },
-  { name: "Page B", pv: 3000, uv: 1398, amt: 2210, time: 3, key: 'pv' },
-  { name: "Page C", pv: 2000, uv: -9800, amt: 2290, time: 9, key: 'pv' },
-  { name: "Page D", pv: null, uv: 3908, amt: 2000, time: 10, key: 'pv' },
-  { name: "Page E", pv: 2500, uv: 4800, amt: 2181, time: 12, key: 'pv' },
-  { name: "Page F", pv: 1220, uv: 3800, amt: 2500, time: 16, key: 'pv' },
-  { name: "Page G", pv: 2300, uv: 4300, amt: 2100, time: 18, key: 'pv' },
+  { name: "Page A", uv: 4000, pv: 2400, amt: 2400, time: 1, key: "uv" },
+  { name: "Page B", uv: 3000, pv: 1398, amt: 2210, time: 3, key: "uv" },
+  { name: "Page C", uv: 2000, pv: -9800, amt: 2290, time: 9, key: "uv" },
+  { name: "Page D", uv: 2780, pv: 3908, amt: 2000, time: 10, key: "uv" },
+  { name: "Page E", uv: 2500, pv: 4800, amt: 2181, time: 12, key: "uv" },
+  { name: "Page F", uv: 1220, pv: 3800, amt: 2500, time: 16, key: "uv" },
+  { name: "Page G", uv: 2300, pv: 4300, amt: 2100, time: 18, key: "uv" },
+  { name: "Page A", pv: 4000, uv: 2400, amt: 2400, time: 1, key: "pv" },
+  { name: "Page B", pv: 3000, uv: 1398, amt: 2210, time: 3, key: "pv" },
+  { name: "Page C", pv: 2000, uv: -9800, amt: 2290, time: 9, key: "pv" },
+  { name: "Page D", pv: null, uv: 3908, amt: 2000, time: 10, key: "pv" },
+  { name: "Page E", pv: 2500, uv: 4800, amt: 2181, time: 12, key: "pv" },
+  { name: "Page F", pv: 1220, uv: 3800, amt: 2500, time: 16, key: "pv" },
+  { name: "Page G", pv: 2300, uv: 4300, amt: 2100, time: 18, key: "pv" },
 ]
 
 export const LineG2Plot = (props) => {
   React.useEffect(() => {
-    const line = new Line("line-g2plot", {
+    const line = new Area("line-g2plot", {
+      // Line 或者 Area 切换折线还是面积图
       height: 300,
       width: 400,
       data,
       padding: "auto",
       xField: "name",
       yField: "pv",
-      seriesField: 'key', // 系列字段
+      seriesField: "key", // 系列字段
       xAxis: {
         tickCount: 10,
-        grid: {  // 网格线配置
+        grid: {
+          // 网格线配置
           line: {
             style: {
-              stroke: 'grey',
+              stroke: "grey",
               lineWidth: 1,
               lineDash: [4, 5],
-              strokeOpacity: 0.4,  
-            }
-          }
-        }
+              strokeOpacity: 0.4,
+            },
+          },
+        },
       },
       yAxis: {
         tickCount: 10,
-        grid: {  // 网格线配置
+        grid: {
+          // 网格线配置
           line: {
             style: {
-              stroke: 'grey',
+              stroke: "grey",
               lineWidth: 1,
               lineDash: [4, 5],
-              strokeOpacity: 0.4,  
-            }
-          }
-        }
+              strokeOpacity: 0.4,
+            },
+          },
+        },
       },
       lineStyle: {
         lineDash: [3, 5], //虚线
       },
       label: true,
       tooltip: {
-        fields: ["name", "pv", "uv"],
+        fields: ["name", "pv"],
+        shared: false, // tooltip 成组显示还是单点显示
       },
       legend: {
-        layout: 'vertical',
-        position: 'right'
+        layout: "vertical",
+        position: "right",
       },
       smooth: true, // 曲线
       connectNulls: false, // 断点处理
       point: {
         size: 5,
-        shape: 'diamond', // 标记点样式
+        shape: "diamond", // 标记点样式
         style: {
-          fill: 'white',
-          stroke: '#5B8FF9',
+          fill: "white",
+          stroke: "#5B8FF9",
           lineWidth: 2,
         },
       },
-      slider: { // 缩略轴
+      slider: {
+        // 缩略轴
         start: 0.1,
         end: 1,
       },
       annotations: [
         {
-          type: 'text',
-          position: ['min', -5000],
-          content: '中位数',
+          type: "text",
+          position: ["min", -5000],
+          content: "中位数",
           offsetY: -4,
           style: {
-            textBaseline: 'bottom',
+            textBaseline: "bottom",
           },
         },
         {
-          type: 'line',
-          start: ['min', -5000],
-          end: ['max', -5000],
+          type: "line",
+          start: ["min", -5000],
+          end: ["max", -5000],
           style: {
-            stroke: '#F4664A',
+            stroke: "#F4664A",
             lineDash: [2, 2],
           },
         },
         {
-          type: 'dataMarker',
-          position: ['Page D', 1216],
+          type: "dataMarker",
+          position: ["Page D", 1216],
           text: {
-            content: '2月份因逢春节水产销售需求旺盛，\n需求大增',
+            content: "2月份因逢春节水产销售需求旺盛，\n需求大增",
             style: {
-              textAlign: 'left',
+              textAlign: "left",
             },
           },
           line: {
@@ -119,14 +124,14 @@ export const LineG2Plot = (props) => {
           },
           point: {
             style: {
-              fill: '#f5222d',
-              stroke: '#f5222d',
+              fill: "#f5222d",
+              stroke: "#f5222d",
             },
           },
           autoAdjust: false,
         },
       ],
-      interactions: [{ type: 'brush' }],
+      interactions: [{ type: "brush" }],
     })
 
     line.render()
