@@ -1,3 +1,5 @@
 export { PieD3 } from "./pie-d3"
-export { PieG2 } from "./pie-g2"
 export { PieRecharts } from "./pie-recharts"
+export { PieG2 } from "./pie-g2"
+export { PieG2Plot } from "./pie-g2plot"
+export { PieEcharts } from "./pie-echarts"
