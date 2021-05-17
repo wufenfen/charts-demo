@@ -95,28 +95,29 @@ export const LineD3 = (props) => {
         .attr("cy", function (d) {
           return y(d.pv)
         })
+        .attr('data', data.name + ':' + data.pv)
         .attr("r", "3px")
         .attr("fill", "white")
         .attr("stroke", "#387908")
 
       // 添加文本没成功！
-      // dom
-      //   .selectAll("text")
-      //   .data(data)
-      //   .enter()
-      //   .append("text")
-      //   .attr("x", function (d) {
-      //     return x(d.name)
-      //   })
-      //   .attr("y", function (d) {
-      //     return y(d.pv)
-      //   })
-      //   .attr("text", function (d) {
-      //     return d.pv
-      //   })  
-      //   .attr("stroke", "black")
-      //   .attr("font-size", 12)
-      //   .attr("color", 'red')
+      dom
+        .selectAll("text")
+        .data(data)
+        .enter()
+        .append("text")
+        .attr("x", function (d) {
+          return x(d.name)
+        })
+        .attr("y", function (d) {
+          return y(d.pv)
+        })
+        .attr("text", function (d) {
+          return d.pv
+        })  
+        .attr("stroke", "black")
+        .attr("font-size", 12)
+        .attr("color", 'red')
 
 
       dom
@@ -129,8 +130,32 @@ export const LineD3 = (props) => {
         .attr("stroke-width", 1.5)
         .attr("stroke-linejoin", "round")
         .attr("stroke-linecap", "round")
+        .attr('stroke-dasharray', '5,5' )
         .attr("d", line2)
-    }
+
+
+        dom.selectAll("circle").on("mouseover",function(d){
+          //(1)取得提示显示的位置
+          var xPosition=parseFloat(d3.select(this).attr("cx"));
+          var yPosition=parseFloat(d3.select(this).attr("cy"))+24;
+         
+          //(2)创建提示条SVG
+          dom.append("text")
+            .attr("id","tooltip")//设置id便于移除提示
+            .attr("x",xPosition)
+            .attr("y",yPosition)
+            .attr("text-anchor","middle")
+            .attr("font-family","sans-setif")
+            .attr("font-size","11px")
+            .attr("font-weight","bold")
+            .text(this.__data__.name+ ': ' + this.__data__.pv);
+         })
+         //(3)移除提示条SVG
+         .on("mouseout",function(){
+            d3.select("#tooltip").remove();
+         })
+         
+    } 
   }, [])
 
   return <svg id={`line-d3-${id}`}> </svg>
